@@ -50,7 +50,7 @@
     "inspect": "npx -y @modelcontextprotocol/inspector node dist/index.js",
     "prepare": "npm run build",
     "fixtures": "node scripts/update-fixtures.mjs",
-    "doctor": "npm run build --silent && node scripts/doctor.mjs",
+    "doctor": "npm run build --silent && node dist/index.js doctor",
     "prepublishOnly": "npm run typecheck && npm test"
   },
   "dependencies": {

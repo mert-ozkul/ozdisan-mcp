@@ -40,7 +40,7 @@ export const rangeSpecSchema = z.object({
     .describe("Unit symbol for min/max as listed in get_category_filters (e.g. 'mA', 'kHz', 'µF', 'V'). If omitted, the property's base SI unit is used (A, Hz, F, V, Ω, B...)."),
 });
 
-function entryOut(e: CategoryEntry) {
+export function entryOut(e: CategoryEntry) {
   return {
     category: e.slug,
     name: e.name,
@@ -51,7 +51,7 @@ function entryOut(e: CategoryEntry) {
   };
 }
 
-function nodeOut(node: RawCategoryNode, depth: number): Record<string, unknown> {
+export function nodeOut(node: RawCategoryNode, depth: number): Record<string, unknown> {
   const children = node.subCategories ?? [];
   return {
     category: node.slug,

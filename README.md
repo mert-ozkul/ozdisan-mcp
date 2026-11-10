@@ -26,6 +26,7 @@ BOM maliyetlendirme ve **datasheet indirme/okuma** yapan, tamamen bilgisayarın�
 - [Kurulum (istemciye göre)](#kurulum-istemciye-göre)
 - [Örnek kullanım](#örnek-kullanım)
 - [Araç referansı](#araç-referansı)
+- [Kaynaklar (resources)](#kaynaklar-resources)
 - [Ayarlar (ortam değişkenleri)](#ayarlar-ortam-değişkenleri)
 - [Nasıl çalışır?](#nasıl-çalışır)
 - [Geliştirme ve testler](#geliştirme-ve-testler)
@@ -62,6 +63,9 @@ API anahtarı, üyelik veya ücret gerekmez. Sunucu sizin bilgisayarınızda ça
 
 Ayrıca iki hazır istem (prompt) gelir: **`komponent_sec`** (ihtiyaca göre adım adım parça seçimi) ve
 **`bom_kontrol`** (BOM'u kontrol edip riskli kalemlere alternatif önerme).
+
+Kaynak (resource) desteği olan istemciler kategori ağacını ve ürünleri araç çağırmadan bağlama ekleyebilir:
+`ozdisan://categories`, `ozdisan://category/{category}` ve `ozdisan://product/{product}` (ayrıntı: [Kaynaklar](#kaynaklar-resources)).
 
 ## Hızlı başlangıç
 
@@ -337,6 +341,19 @@ En sonda KDV hariç toplam. Tek çağrıda en fazla 60 satır işlenir (satır b
 - `read_datasheet(product | url, search?, pages?, max_chars?)`: PDF'ten metin çıkarır. `search` ile önce ilgili sayfalar bulunur (alaka sırasına göre), `pages` ile (`"1-3,7"`) belirli sayfalar okunur. Görseller/çizimler metne dahil değildir.
 </details>
 
+## Kaynaklar (resources)
+
+Araçlarla aynı JSON'u döndüren salt-okunur MCP kaynakları. Dil ve para birimi `OZDISAN_LANG` / `OZDISAN_CURRENCY`
+ayarlarından gelir.
+
+| Adres | İçerik |
+|---|---|
+| `ozdisan://categories` | Ana kategori grupları ve alt kategorileri (2 seviye, ürün sayılarıyla) |
+| `ozdisan://category/{category}` | Tek kategori: yol, ürün sayısı, sayfa adresi, alt kategoriler. `{category}` slug, sayı veya ad olabilir; istemci tamamlama (autocomplete) önerir |
+| `ozdisan://product/{product}` | Tek ürünün tüm ayrıntısı (`get_product` ile aynı, muadiller hariç). `{product}` ürün kodu veya tam üretici parça numarası |
+
+Örnek: `ozdisan://product/368374`, `ozdisan://product/LM317KCT`, `ozdisan://category/lineer-voltaj-regulatorleri-279`.
+
 ## Ayarlar (ortam değişkenleri)
 
 İstemci yapılandırmasında `env` alanıyla verilir:
@@ -389,14 +406,19 @@ npm run dev          # TypeScript kaynağından çalıştır
 npm run typecheck    # tip kontrolü
 npm test             # birim testleri (ağ gerektirmez)
 npm run test:e2e     # uçtan uca testler (canlı ozdisan.com'a bağlanır)
-npm run doctor       # canlı uç noktaları tek tek denetler (PASS/FAIL tablosu, sitenin yapısı değiştiyse burada görünür)
+npm run doctor       # derleyip canlı uç noktaları denetler (= npx -y ozdisan-mcp doctor)
 npm run inspect      # MCP Inspector ile araçları elle deneyin
 ```
 
-**Bir şeyler bozulduğunda:** araçlar tuhaf sonuç veriyorsa önce `npm run doctor` çalıştırın. Özdisan sitesi
-HTML/API yapısını değiştirdiğinde sunucu bunu **kullanıcı hatası gibi göstermez**: "ürün bulunamadı" demek yerine
-`SiteContractError` döner ve mesajda `npm run doctor` + güncelleme gereksinimi yazar. `--json` ile makine tarafından
-okunabilir çıktı alınır (`node scripts/doctor.mjs --json`).
+**Bir şeyler bozulduğunda:** araçlar tuhaf sonuç veriyorsa önce teşhis komutunu çalıştırın (depo gerekmez):
+
+```bash
+npx -y ozdisan-mcp doctor
+```
+
+Yedi canlı uç noktayı tek tek dener, PASS/FAIL tablosu basar ve sorun varsa 1 ile çıkar; `--json` makine tarafından
+okunabilir çıktı verir. Özdisan sitesi HTML/API yapısını değiştirdiğinde sunucu bunu **kullanıcı hatası gibi
+göstermez**: "ürün bulunamadı" demek yerine `SiteContractError` döner ve mesajda bu komutu önerir.
 
 **Test yapısı**
 
@@ -432,7 +454,7 @@ Filtrelerde özellik adlarını iki dilde de yazabilirsiniz.
 Filtreler çok dar olabilir. `get_category_filters` aracına mevcut filtrelerinizi verirseniz hâlâ seçilebilir değerleri ve kalan ürün sayısını görürsünüz.
 
 **Araçlar eskiden çalışıyordu, şimdi saçmalıyor.**
-Özdisan site yapısını değiştirmiş olabilir. `npm run doctor` çalıştırın: yedi uç noktayı tek tek dener ve hangisinin
+Özdisan site yapısını değiştirmiş olabilir. `npx -y ozdisan-mcp doctor` çalıştırın: yedi uç noktayı tek tek dener ve hangisinin
 bozulduğunu söyler. Sunucu bu durumda "ürün bulunamadı" demez, `SiteContractError` ile açık uyarı verir.
 
 **Kurumsal hesabımla giriş yapıp kendi fiyatlarımı görebilir miyim?**

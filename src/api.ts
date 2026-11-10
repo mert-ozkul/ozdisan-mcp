@@ -95,7 +95,7 @@ export function extractNextData(html: string): Record<string, unknown> | undefin
 /** Sitenin veri sözleşmesi bozulduğunda kullanıcı girdisi hatası yerine açık bir uyarı fırlatır. */
 function siteContractError(what: string): never {
   throw new SiteContractError(
-    `${what} beklenen yapıda değil. Özdisan sitesi değişmiş olabilir; "npm run doctor" ile uç noktaları denetleyin, ` +
+    `${what} beklenen yapıda değil. Özdisan sitesi değişmiş olabilir; "npx -y ozdisan-mcp doctor" ile uç noktaları denetleyin, ` +
       `sorun sürüyorsa ozdisan-mcp güncellemesi gerekir.`,
   );
 }

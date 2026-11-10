@@ -31,10 +31,10 @@ Ağa çıkan değişikliklerde ayrıca `npm run test:e2e` (canlı site, ~20 sn) 
 - **Kullanıcı hatası ile site hatasını ayırın.**
   - Kullanıcı girdisi hatalı / ürün gerçekten yok → `UserInputError` (mesaj kullanıcıya gösterilir).
   - Ağ, zaman aşımı, HTTP hatası → `OzdisanError`.
-  - Site yapısı değişmiş → `SiteContractError` (`npm run doctor` yönlendirmesi otomatik eklenir).
+  - Site yapısı değişmiş → `SiteContractError` (`ozdisan-mcp doctor` yönlendirmesi otomatik eklenir).
 - **Yeni araç eklerken:** `registerTool` şemasına açıklama + `readOnlyAnnotations` ekleyin, sonucu
   `ok()`/`handle()` ile döndürün, `test/unit/server.test.ts` içindeki `EXPECTED_TOOLS` listesini güncelleyin.
-- **Yeni uç nokta kullanıyorsanız** `scripts/doctor.mjs` içine bir denetim ekleyin; böylece site değiştiğinde
+- **Yeni uç nokta kullanıyorsanız** `src/doctor.ts` içine bir denetim ekleyin; böylece site değiştiğinde
   sessizce bozulmak yerine FAIL görünür.
 - **Test:** hata düzeltiyorsanız önce hatayı gösteren testi yazın (kırmızı), sonra düzeltin (yeşil).
   Testi zayıflatmayın.
@@ -45,5 +45,5 @@ Ağa çıkan değişikliklerde ayrıca `npm run test:e2e` (canlı site, ~20 sn) 
 
 ## Hata bildirimi
 
-Issue şablonunu kullanın ve şunları ekleyin: `node --version`, `ozdisan-mcp --version`, `npm run doctor --json`
+Issue şablonunu kullanın ve şunları ekleyin: `node --version`, `ozdisan-mcp --version`, `npx -y ozdisan-mcp doctor --json`
 çıktısı, hatalı araç çağrısı ve dönen sonuç (fiyat/stok değerlerini maskeleyebilirsiniz).

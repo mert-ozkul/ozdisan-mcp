@@ -5,7 +5,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Teşekkürler. Lütfen önce `npm run doctor` çalıştırın; site yapısı değiştiyse sorun burada görünür.
+        Teşekkürler. Lütfen önce `npx -y ozdisan-mcp doctor` çalıştırın; site yapısı değiştiyse sorun burada görünür.
   - type: input
     id: version
     attributes:
@@ -23,8 +23,8 @@ body:
   - type: textarea
     id: doctor
     attributes:
-      label: "`npm run doctor --json` çıktısı"
-      description: Site değişikliği şüphesinde zorunlu. Çıktı yoksa `npm run doctor` çalıştırıp yapıştırın.
+      label: "`npx -y ozdisan-mcp doctor --json` çıktısı"
+      description: Site değişikliği şüphesinde zorunlu. Çıktı yoksa `npx -y ozdisan-mcp doctor --json` çalıştırıp yapıştırın.
       render: json
     validations:
       required: false

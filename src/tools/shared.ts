@@ -67,7 +67,7 @@ export function fail(error: unknown): CallToolResult {
             error: error.message,
             hint:
               "Özdisan sitesinin veri yapısı değişmiş olabilir; bu bir ağ/bağlantı sorunu değildir. " +
-              "'npm run doctor' ile uç noktaları denetleyin, sorun sürüyorsa ozdisan-mcp güncellemesi gerekir. " +
+              "'npx -y ozdisan-mcp doctor' ile uç noktaları denetleyin, sorun sürüyorsa ozdisan-mcp güncellemesi gerekir. " +
               "Bu arada product/category alanlarını kullanıcıya 'bulunamadı' diye bildirmeyin.",
           }),
         },

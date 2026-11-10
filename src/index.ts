@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { loadConfig, VERSION } from "./config.js";
+import { runDoctor } from "./doctor.js";
 import { createServer } from "./server.js";
 
 const HELP = `ozdisan-mcp ${VERSION}
@@ -8,6 +9,7 @@ const HELP = `ozdisan-mcp ${VERSION}
 
 Kullanım:
   npx -y ozdisan-mcp            MCP sunucusunu stdio üzerinden başlatır
+  ozdisan-mcp doctor [--json]   Canlı Özdisan uç noktalarını denetler (site yapısı değişti mi?)
   ozdisan-mcp --version         Sürümü yazdırır
   ozdisan-mcp --help            Bu yardımı gösterir
 
@@ -21,6 +23,7 @@ Ortam değişkenleri:
   OZDISAN_MIN_INTERVAL_MS   İstekler arası en kısa süre (varsayılan: 250)
   OZDISAN_MAX_CONCURRENCY   Eşzamanlı istek sayısı (varsayılan: 2)
   OZDISAN_MAX_DOWNLOAD_MB   İndirme boyutu sınırı (varsayılan: 50)
+  OZDISAN_BASE_URL          Site kökü (varsayılan: https://www.ozdisan.com)
 
 Bu program bir MCP istemcisi (Claude Desktop, Claude Code, Cursor, VS Code...) tarafından başlatılmak içindir.`;
 
@@ -43,6 +46,12 @@ async function main(): Promise<void> {
   }
   if (args.includes("--version") || args.includes("-v")) {
     process.stdout.write(`${VERSION}\n`);
+    return;
+  }
+
+  if (args[0] === "doctor") {
+    const report = await runDoctor(loadConfig(), { json: args.includes("--json") });
+    process.exitCode = report.ok ? 0 : 1;
     return;
   }
 

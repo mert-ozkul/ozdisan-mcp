@@ -4,13 +4,14 @@
 
 ## Neden
 
-<!-- Varsa issue: Fixes #123. Site değişikliği kaynaklıysa `npm run doctor --json` çıktısı. -->
+<!-- Varsa issue: Fixes #123. Site değişikliği kaynaklıysa `npx -y ozdisan-mcp doctor --json` çıktısı. -->
 
 ## Kontrol listesi
 
 - [ ] `npm run typecheck` temiz
 - [ ] `npm test` yeşil
 - [ ] Ağa çıkan değişiklikte `npm run test:e2e` yeşil
-- [ ] Yeni uç nokta/alaka kullanılıyorsa `scripts/doctor.mjs` güncellendi
+- [ ] Yeni uç nokta/alaka kullanılıyorsa `src/doctor.ts` güncellendi
+- [ ] Yeni araç/kaynak eklendiyse README tablosu güncellendi
 - [ ] Yeni araç eklendiyse `EXPECTED_TOOLS` ve araç açıklaması güncellendi
 - [ ] Refactor ile davranış değişikliği aynı PR'da karıştırılmadı

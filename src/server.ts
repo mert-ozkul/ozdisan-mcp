@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import { OzdisanClient } from "./api.js";
 import { loadConfig, VERSION, type Config } from "./config.js";
+import { registerResources } from "./resources.js";
 import { registerCategoryTools } from "./tools/categories.js";
 import { registerDatasheetTools } from "./tools/datasheet.js";
 import { registerProductTools } from "./tools/products.js";
@@ -15,6 +16,7 @@ Recommended workflows:
 - Out of stock / EOL part → get_alternatives.
 - Choosing between candidates → compare_products.
 - Final BOM cost & availability → check_bom.
+Resources: ozdisan://categories, ozdisan://category/{category} and ozdisan://product/{product} return the same JSON as the browse_categories / get_product tools.
 The 'product' field in results is Özdisan's product code; pass it to other tools. Category and property names are Turkish by default (language='en' for English).`;
 
 export function createServer(config: Config = loadConfig()): { server: McpServer; client: OzdisanClient } {
@@ -25,6 +27,7 @@ export function createServer(config: Config = loadConfig()): { server: McpServer
   registerProductTools(server, ctx);
   registerCategoryTools(server, ctx);
   registerDatasheetTools(server, ctx);
+  registerResources(server, ctx);
 
   server.registerPrompt(
     "komponent_sec",

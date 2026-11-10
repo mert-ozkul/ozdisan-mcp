@@ -9,13 +9,17 @@ Site değiştiğinde hatalı sonuç vermeyi önleyen düzeltmeler ([@bahattinerc
   hâlâ `UserInputError` olarak dönüyor.
 - **Uç nokta sözleşmesi denetimi eklendi.** Kategori ağacı, kategori arama, ürün listesi (`variantList`), filtre
   (`propertyFilters`) ve hızlı arama yanıtları beklenen alanları taşımıyorsa boş sonuç yerine açık hata veriliyor.
-- **`npm run doctor`.** Yedi canlı uç noktayı tek tek denetleyen teşhis komutu (`node scripts/doctor.mjs --json`
-  makine tarafından okunabilir çıktı verir); bozuk uç noktada 1 ile çıkar.
+- **`ozdisan-mcp doctor` alt komutu.** Yedi canlı uç noktayı tek tek denetleyen teşhis komutu; depo gerekmeden
+  `npx -y ozdisan-mcp doctor` ile çalışır (`--json` makine tarafından okunabilir çıktı verir), bozuk uç noktada 1 ile
+  çıkar. Disk önbelleğini kullanmaz, her zaman canlı siteyi denetler. Depoda `npm run doctor` aynı komutu çalıştırır.
+- **MCP kaynakları (resources).** `ozdisan://categories`, `ozdisan://category/{category}` (kategori tamamlama
+  destekli) ve `ozdisan://product/{product}`: istemciler kategori ağacını ve ürünleri araç çağırmadan bağlama
+  ekleyebilir.
 - **MCP istemcisine doğru ipucu.** `SiteContractError` sonucunda "ağ/bağlantı" değil, "site yapısı değişmiş olabilir,
-  `npm run doctor` + güncelleme" ipucu dönüyor ve modelin bunu "bulunamadı" diye özetlemesi engelleniyor.
+  `npx -y ozdisan-mcp doctor` + güncelleme" ipucu dönüyor ve modelin bunu "bulunamadı" diye özetlemesi engelleniyor.
 - Doküman: `OZDISAN_BASE_URL` belgelendi, npm yayın durumu düzeltildi, teşhis bölümü eklendi.
 - Depo: `SECURITY.md`, `CONTRIBUTING.md`, dependabot, yayın iş akışı ve issue/PR şablonları.
-- Testler: 10 yeni birim testi (sözleşme bozulması senaryoları) + 1 ipucu testi (116 test).
+- Testler: sözleşme bozulması, doctor ve kaynak senaryoları için yeni birim testleri (126 birim + 31 uçtan uca test).
 
 ## 0.1.0
 

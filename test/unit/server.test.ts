@@ -262,3 +262,57 @@ describe("SiteContractError kullanıcıya doğru ipucu verir", () => {
     expect(text).toContain("veri");
   });
 });
+
+describe("MCP kaynakları (resources)", () => {
+  async function read(uri: string) {
+    const res = await client.readResource({ uri });
+    const first = res.contents[0] as { uri: string; mimeType?: string; text: string };
+    expect(first.mimeType).toBe("application/json");
+    return JSON.parse(first.text);
+  }
+
+  it("statik kaynağı ve şablonları listeler", async () => {
+    const { resources } = await client.listResources();
+    expect(resources.map((r) => r.uri)).toEqual(["ozdisan://categories"]);
+    const { resourceTemplates } = await client.listResourceTemplates();
+    expect(resourceTemplates.map((t) => t.uriTemplate).sort()).toEqual([
+      "ozdisan://category/{category}",
+      "ozdisan://product/{product}",
+    ]);
+    expect(client.getServerCapabilities()?.resources).toBeDefined();
+  });
+
+  it("ozdisan://categories iki seviyeli ağacı döndürür", async () => {
+    const data = await read("ozdisan://categories");
+    expect(data.total_products).toBeGreaterThan(0);
+    expect(data.categories).toHaveLength(5);
+    expect(data.categories.some((c: { subcategories?: unknown[] }) => (c.subcategories?.length ?? 0) > 0)).toBe(true);
+  });
+
+  it("ozdisan://category/{category} kategoriyi ve alt kategorilerini döndürür", async () => {
+    const data = await read("ozdisan://category/9");
+    expect(data.category.category).toMatch(/-9$/);
+    expect(data.subcategories.length).toBeGreaterThan(0);
+    expect(data.url).toContain("ozdisan.com");
+  });
+
+  it("ozdisan://product/{product} get_product ile aynı ayrıntıyı döndürür", async () => {
+    const data = await read("ozdisan://product/368374");
+    const tool = await call("get_product", { product: "368374" });
+    expect(data.part_number).toBe("STM32F103C8T6");
+    expect(data.part_number).toBe(tool.data.part_number);
+    expect(data.pricing.price_breaks).toEqual(tool.data.pricing.price_breaks);
+  });
+
+  it("bilinmeyen ürün kaynağında 'bulunamadı' hatası verir", async () => {
+    await expect(client.readResource({ uri: "ozdisan://product/999999999" })).rejects.toThrow(/bulunamadı/);
+  });
+
+  it("kategori değişkeni için tamamlama önerir", async () => {
+    const res = await client.complete({
+      ref: { type: "ref/resource", uri: "ozdisan://category/{category}" },
+      argument: { name: "category", value: "mikroişlemci" },
+    });
+    expect(res.completion.values).toContain("mikroislemciler-218");
+  });
+});
