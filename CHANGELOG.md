@@ -2,7 +2,7 @@
 
 ## 0.1.1
 
-Site değiştiğinde hatalı sonuç vermeyi önleyen düzeltmeler (fork).
+Site değiştiğinde hatalı sonuç vermeyi önleyen düzeltmeler ([@bahattinercan](https://github.com/bahattinercan) katkısıyla).
 
 - **Hata maskeleme kaldırıldı.** Ürün sayfasında `__NEXT_DATA__` yoksa veya JSON'u bozuksa sunucu artık
   "ürün bulunamadı" demiyor; `SiteContractError` fırlatıyor. Gerçek "ürün yok" durumu (site 200 + `pageProps.error`)
@@ -13,7 +13,7 @@ Site değiştiğinde hatalı sonuç vermeyi önleyen düzeltmeler (fork).
   makine tarafından okunabilir çıktı verir); bozuk uç noktada 1 ile çıkar.
 - **MCP istemcisine doğru ipucu.** `SiteContractError` sonucunda "ağ/bağlantı" değil, "site yapısı değişmiş olabilir,
   `npm run doctor` + güncelleme" ipucu dönüyor ve modelin bunu "bulunamadı" diye özetlemesi engelleniyor.
-- Doküman: `OZDISAN_BASE_URL` belgelendi, npm yayın durumu düzeltildi, teşhis bölümü ve fork notu eklendi.
+- Doküman: `OZDISAN_BASE_URL` belgelendi, npm yayın durumu düzeltildi, teşhis bölümü eklendi.
 - Depo: `SECURITY.md`, `CONTRIBUTING.md`, dependabot, yayın iş akışı ve issue/PR şablonları.
 - Testler: 10 yeni birim testi (sözleşme bozulması senaryoları) + 1 ipucu testi (116 test).
 

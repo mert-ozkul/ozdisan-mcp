@@ -3,8 +3,7 @@ name: Publish
 # Etiket atıldığında npm'e yayınlar (elle de çalıştırılabilir, önce kuru çalıştırma yapar).
 # Gereksinimler:
 #   - Depo sırrı: NPM_TOKEN (npm "Automation" token)
-#   - package.json "name" alanı npm'de size ait olmalı. `ozdisan-mcp` adı zaten alınmış durumda:
-#     kendi yayınınız için "@kullanici/ozdisan-mcp" gibi kapsamlı (scoped) bir ad kullanın.
+#   - package.json "name" alanındaki paket (ozdisan-mcp) npm'de bu hesaba ait olmalı.
 
 on:
   push:

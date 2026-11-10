@@ -9,7 +9,7 @@ export const LANGUAGES: readonly Language[] = ["tr", "en"];
 export const CURRENCIES: readonly Currency[] = ["TRY", "USD", "EUR"];
 
 export const VERSION = "0.1.1";
-export const REPO_URL = "https://github.com/bahattinercan/ozdisan-mcp";
+export const REPO_URL = "https://github.com/mert-ozkul/ozdisan-mcp";
 
 export interface Config {
   /** Özdisan web sitesinin kök adresi. */

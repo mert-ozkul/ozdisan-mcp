@@ -1,14 +1,13 @@
 # Katkı Rehberi
 
-Katkılar memnuniyetle karşılanır. Bu depo, `ozdisan-mcp` projesinin bir çatalıdır; özgün proje:
-<https://github.com/mert-ozkul/ozdisan-mcp>.
+Katkılar memnuniyetle karşılanır: <https://github.com/mert-ozkul/ozdisan-mcp>.
 
 ## Hızlı başlangıç
 
 ```bash
 npm install        # bağımlılıklar + derleme (prepare)
 npm test           # birim testleri (ağ gerekmez)
-npm run e2e        # canlı ozdisan.com'a karşı uçtan uca testler
+npm run test:e2e   # canlı ozdisan.com'a karşı uçtan uca testler
 npm run doctor     # canlı uç noktaların hâlâ beklenen yapıda olduğunu doğrular
 ```
 

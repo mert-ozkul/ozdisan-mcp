@@ -20,11 +20,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahattinercan/ozdisan-mcp.git"
+    "url": "git+https://github.com/mert-ozkul/ozdisan-mcp.git"
   },
-  "homepage": "https://github.com/bahattinercan/ozdisan-mcp#readme",
+  "homepage": "https://github.com/mert-ozkul/ozdisan-mcp#readme",
   "bugs": {
-    "url": "https://github.com/bahattinercan/ozdisan-mcp/issues"
+    "url": "https://github.com/mert-ozkul/ozdisan-mcp/issues"
   },
   "type": "module",
   "bin": {

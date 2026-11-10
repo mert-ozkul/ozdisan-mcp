@@ -118,7 +118,7 @@ if (jsonOutput) {
     failed.length === 0
       ? `SONUÇ: ${results.length} denetim geçti. Uç noktalar beklenen yapıda.`
       : `SONUÇ: ${failed.length}/${results.length} denetim BAŞARISIZ. Araçlar hatalı sonuç verebilir; ` +
-          `sorun sürüyorsa https://github.com/bahattinercan/ozdisan-mcp adresinde issue açın.`,
+          `sorun sürüyorsa https://github.com/mert-ozkul/ozdisan-mcp adresinde issue açın.`,
   );
 }
 process.exit(failed.length === 0 ? 0 : 1);

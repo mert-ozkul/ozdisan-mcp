@@ -10,7 +10,7 @@
 
 Lütfen **herkese açık issue açmayın**. GitHub'ın özel bildirim kanalını kullanın:
 
-<https://github.com/bahattinercan/ozdisan-mcp/security/advisories/new>
+<https://github.com/mert-ozkul/ozdisan-mcp/security/advisories/new>
 
 Bildirimde şunlar olsun: etkilenen sürüm, yeniden üretme adımları, beklenen ve gerçek davranış, varsa önerdiğiniz düzeltme.
 İlk yanıt hedefi 72 saattir. Düzeltme yayınlanana kadar ayrıntıyı kamuya açıklamayın.

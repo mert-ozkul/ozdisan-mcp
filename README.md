@@ -86,7 +86,7 @@ Ardından kullandığınız yapay zekâ aracına aşağıdaki MCP sunucu tanım�
 
 İstemcinizi yeniden başlatın ve şunu sorun: *"Özdisan'da stokta olan, 3.3V çıkışlı, en az 500mA veren SOT-23 kılıflı LDO'ları fiyata göre listele."*
 
-> **Bu paket npm'de yayında:** `ozdisan-mcp@0.1.x`. GitHub'dan (fork'unuzdan veya upstream'den) kurmak isterseniz
+> **Bu paket npm'de yayında:** `ozdisan-mcp@0.1.x`. Doğrudan GitHub'dan kurmak isterseniz
 > `"args": ["-y", "github:mert-ozkul/ozdisan-mcp"]` kullanın (ilk çalıştırmada derleme yaptığı için biraz daha uzun sürer).
 
 ## Kurulum (istemciye göre)
@@ -437,19 +437,6 @@ bozulduğunu söyler. Sunucu bu durumda "ürün bulunamadı" demez, `SiteContrac
 
 **Kurumsal hesabımla giriş yapıp kendi fiyatlarımı görebilir miyim?**
 Şu an desteklenmiyor; yalnızca misafir fiyatları gösterilir.
-
-## Bu depo hakkında (fork)
-
-Bu depo [`mert-ozkul/ozdisan-mcp`](https://github.com/mert-ozkul/ozdisan-mcp) projesinin bir çatalıdır; özgün kod ve
-MIT lisansı korunmuştur. Çatalda yapılanlar:
-
-- **Sessiz hata maskeleme kaldırıldı:** site HTML/API yapısı değiştiğinde araçlar artık "bulunamadı" demiyor;
-  `SiteContractError` + `npm run doctor` yönlendirmesi dönüyor.
-- **Uç nokta sözleşmesi denetimi:** kategori ağacı, ürün listesi, filtre ve hızlı arama yanıtları beklenen alanları
-  taşımıyorsa boş sonuç yerine açık hata veriliyor.
-- **`npm run doctor`:** canlı uç noktaları tek tek denetleyen teşhis komutu (`--json` destekli).
-- Doküman tutarsızlıkları giderildi (`OZDISAN_BASE_URL`, npm durumu), `SECURITY.md`, `CONTRIBUTING.md`, dependabot ve
-  yayın iş akışı eklendi.
 
 ## Sorumluluk reddi
 
