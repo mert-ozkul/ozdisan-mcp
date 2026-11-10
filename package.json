@@ -1,7 +1,7 @@
 {
   "name": "ozdisan-mcp",
-  "version": "0.1.0",
-  "description": "Özdisan Elektronik (ozdisan.com) için yerel çalışan MCP sunucusu: 1M+ elektronik komponentte arama, kategori gezme, parametrik filtreleme, ürün detayı, fiyat/stok, muadil ürün ve datasheet indirme/okuma.",
+  "version": "0.1.1",
+  "description": "Özdisan Elektronik (ozdisan.com) için yerel çalışan MCP sunucusu: ~960 bin elektronik komponentte arama, kategori gezme, parametrik filtreleme, ürün detayı, fiyat/stok, muadil ürün ve datasheet indirme/okuma.",
   "keywords": [
     "mcp",
     "model-context-protocol",
@@ -50,6 +50,7 @@
     "inspect": "npx -y @modelcontextprotocol/inspector node dist/index.js",
     "prepare": "npm run build",
     "fixtures": "node scripts/update-fixtures.mjs",
+    "doctor": "npm run build --silent && node scripts/doctor.mjs",
     "prepublishOnly": "npm run typecheck && npm test"
   },
   "dependencies": {
